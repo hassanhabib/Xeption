@@ -12,7 +12,9 @@ using Force.DeepCloner;
 namespace Xeptions
 {
     public class Xeption : Exception
-    {
+        {
+        public List<string> this[string key] => GetDataList(key);
+
         public Xeption() : base() { }
 
         public Xeption(string message) : base(message) { }
@@ -220,6 +222,16 @@ namespace Xeptions
             {
                 builder.AppendLine(message);
             }
+        }
+
+        private List<string> GetDataList(string key)
+            {
+            List<string> dataValues = null;
+
+            if (this.Data.Contains(key))
+                dataValues = this.Data[key] as List<string>;
+
+            return dataValues;
         }
     }
 }
